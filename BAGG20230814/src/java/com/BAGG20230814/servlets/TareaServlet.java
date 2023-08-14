@@ -40,15 +40,15 @@ public class TareaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        request.setAttribute("tasks", tasks);
+        request.setAttribute("task", tasks);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
+        String name = request.getParameter("nombre");
+        String description = request.getParameter("descripcion");
 
         try (Connection connection = DBUtils.getConnection()) {
             String query = "INSERT INTO Tarea (Nombre, Descripcion, Completada, FechaCreacion) VALUES (?, ?, 0, GETDATE())";
@@ -60,6 +60,6 @@ public class TareaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect(request.getContextPath() + "/TaskServlet");
+        response.sendRedirect(request.getContextPath() + "/TareaServlet");
     }
 }
